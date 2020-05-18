@@ -1,0 +1,31 @@
+version: "3.8"
+
+
+services:
+
+    typo3:
+        image: priorist/typo3
+        build: .
+        volumes:
+            - typo3-conf:/var/www/html/public/typo3conf
+        ports:
+            - 80:80
+
+
+    typo3-db:
+        image: mariadb:latest
+        volumes:
+            - typo3-db-data:/var/lib/mysql
+        ports:
+            - 3306:3306
+        environment:
+            MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
+            MYSQL_USER: typo3
+            MYSQL_PASSWORD: typo3
+            MYSQL_DATABASE: typo3
+        command: --character-set-server=utf8 --collation-server=utf8_unicode_ci
+
+
+volumes:
+    typo3-db-data:
+    typo3-conf:
