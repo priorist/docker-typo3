@@ -7,7 +7,11 @@ services:
         image: priorist/typo3
         build: .
         volumes:
+            - typo3-config:/var/www/html/config
+            - typo3-var:/var/www/html/var
             - typo3-conf:/var/www/html/public/typo3conf
+            - typo3-temp:/var/www/html/public/typo3temp
+            - typo3-fileadmin:/var/www/html/public/fileadmin
         ports:
             - 80:80
 
@@ -28,4 +32,9 @@ services:
 
 volumes:
     typo3-db-data:
+    typo3-config:
+    typo3-var:
     typo3-conf:
+    typo3-temp:
+    typo3-fileadmin:
+    typo3-uploads:

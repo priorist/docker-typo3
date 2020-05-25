@@ -28,6 +28,9 @@ RUN apt-get update && \
     docker-php-ext-install -j$(nproc) mysqli soap gd zip opcache intl pgsql pdo_pgsql && \
     echo 'always_populate_raw_post_data = -1\nmax_execution_time = 240\nmax_input_vars = 1500\nupload_max_filesize = 32M\npost_max_size = 32M' > /usr/local/etc/php/conf.d/typo3.ini && \
 
+# Set default php.ini
+    cp /usr/local/etc/php/php.ini-development /usr/local/etc/php/php.ini && \
+
 # Configure Apache as needed
     a2enmod rewrite && \
     apt-get clean && \
@@ -50,6 +53,11 @@ RUN apt-get update && \
 # Install TYPO3
     composer create-project "typo3/cms-base-distribution:^10.4" . && \
     touch public/FIRST_INSTALL && \
+    mkdir config && \
     chown -R www-data:www-data .
 
+VOLUME /var/www/html/config
+VOLUME /var/www/html/var
 VOLUME /var/www/html/public/typo3conf
+VOLUME /var/www/html/public/typo3temp
+VOLUME /var/www/html/public/fileadmin
