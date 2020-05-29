@@ -44,20 +44,6 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/* /usr/src/* && \
 
 # Install XDebug
-    pecl install xdebug && \
+    pecl install xdebug
 
-# Install composer
-    wget -O /usr/local/bin/composer https://getcomposer.org/composer-stable.phar && \
-    chmod +x /usr/local/bin/composer && \
-
-# Install TYPO3
-    composer create-project "typo3/cms-base-distribution:^10.4" . && \
-    touch public/FIRST_INSTALL && \
-    mkdir config && \
-    chown -R www-data:www-data .
-
-VOLUME /var/www/html/config
-VOLUME /var/www/html/var
-VOLUME /var/www/html/public/typo3conf
-VOLUME /var/www/html/public/typo3temp
-VOLUME /var/www/html/public/fileadmin
+VOLUME /var/www/html
