@@ -8,6 +8,7 @@ COPY res/service-config/php/development.ini /usr/local/etc/php/conf.d/developmen
 # Install TYPO3 requirements
 # Thanks to https://github.com/martin-helmich/docker-typo3
 RUN apt-get update && \
+    apt-get upgrade -y && \
     apt-get install -y --no-install-recommends \
         wget \
 # Configure PHP
