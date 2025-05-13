@@ -23,7 +23,7 @@ RUN apt-get update && \
         graphicsmagick && \
 # Configure extensions
     docker-php-ext-configure gd --with-libdir=/usr/include/ --with-jpeg --with-freetype && \
-    docker-php-ext-install -j$(nproc) mysqli soap gd zip opcache intl mbstring pgsql pdo_pgsql && \
+    docker-php-ext-install -j$(nproc) exif mysqli soap gd zip opcache intl mbstring pgsql pdo_pgsql && \
     echo 'always_populate_raw_post_data = -1\nmax_execution_time = 240\nmax_input_vars = 1500\nupload_max_filesize = 32M\npost_max_size = 32M' > /usr/local/etc/php/conf.d/typo3.ini && \
 # Set default php.ini
     cp /usr/local/etc/php/php.ini-development /usr/local/etc/php/php.ini && \
